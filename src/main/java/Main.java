@@ -39,19 +39,20 @@ public class Main {
                 .forEach(p -> System.out.println(p.getPrice()));
 
         System.out.println("------------------4-------------------");
-        List<Order> orderList4 = orders.stream()
+        List<Product> productList = orders.stream()
                 .filter(o -> o.getDeliveryDate().isAfter(LocalDate.parse("2021-02-01"))
                         && o.getDeliveryDate().isBefore(LocalDate.parse("2021-04-01"))
                         && o.getCustomer().getTier().equals(2))
+                .flatMap(o -> o.getProducts().stream())
                 .collect(Collectors.toList());
-        System.out.println(orderList4);
+        System.out.println(productList);
 
         System.out.println("------------------5-------------------");
-        List<Product> booksMin = products.stream()
+        Optional<Product> product = products.stream()
                 .filter(p -> p.getCategory().equals("Books"))
-                .sorted((p, p1) -> (int) (p.getPrice() - p1.getPrice()))
-                .limit(1).collect(Collectors.toList());
-        System.out.println(booksMin);
+                .sorted(Comparator.comparing(Product::getPrice))
+                .findFirst();
+        System.out.println(product);
 
         System.out.println("------------------6-------------------");
         List<Order> lastOrders = orders.stream()
