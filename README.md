@@ -1,4 +1,4 @@
-# Do thees tasks:
+# Do these tasks:
 1. Obtain a list of products belongs to category "Books" with price > 100
 2. Obtain a list of order with products belong to category "Baby"
 3. Obtain a list of product with category = "Toys" and then apply 10% discount
